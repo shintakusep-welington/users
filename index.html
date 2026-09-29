@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Financeiro - Restaurante</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🍽️ Gestão Financeira do Restaurante</h1>
+
+        <!-- Painel de Resumo Geral -->
+        <div class="cards-container">
+            <div class="card entrada">
+                <h3>Entradas (Geral)</h3>
+                <p id="total-entradas">R$ 0,00</p>
+            </div>
+            <div class="card saida">
+                <h3>Saídas (Geral)</h3>
+                <p id="total-saidas">R$ 0,00</p>
+            </div>
+            <div class="card saldo">
+                <h3>Saldo Acumulado</h3>
+                <p id="saldo-total">R$ 0,00</p>
+            </div>
+        </div>
+
+        <!-- Formulário de Cadastro -->
+        <div class="form-container no-print">
+            <h2>Nova Movimentação</h2>
+            <form id="finance-form">
+                <div class="form-group">
+                    <label for="data">Data</label>
+                    <input type="date" id="data" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao" placeholder="Ex: Venda Almoço, Carne" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valor">Valor (R$)</label>
+                    <input type="number" id="valor" step="0.01" placeholder="0.00" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo" required>
+                        <option value="entrada">Entrada (Receita)</option>
+                        <option value="saida">Saída (Despesa)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" required>
+                        <option value="Vendas">Vendas / Salão</option>
+                        <option value="Delivery">Delivery</option>
+                        <option value="Insumos">Insumos / Ingredientes</option>
+                        <option value="Equipe">Pagamento de Equipe</option>
+                        <option value="Manutenção">Manutenção / Aluguel</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-salvar">Adicionar Registro</button>
+            </form>
+        </div>
+
+        <!-- Gerador de Relatório Diário -->
+        <div class="relatorio-box no-print">
+            <h2>📊 Relatório Diário</h2>
+            <div class="relatorio-filtros">
+                <label for="data-relatorio">Selecione o Dia:</label>
+                <input type="date" id="data-relatorio">
+                <button id="btn-gerar-relatorio" class="btn-filtrar">Filtrar Dia</button>
+                <button id="btn-imprimir" class="btn-imprimir" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+            </div>
+        </div>
+
+        <!-- Tabela de Registros -->
+        <div class="table-container" id="area-impressao">
+            <div class="header-impressao">
+                <h2>Relatório Financeiro de Lançamentos</h2>
+                <p id="subtitulo-relatorio">Exibindo todos os registros</p>
+            </div>
+
+            <!-- Resumo do Relatório Filtrado -->
+            <div class="resumo-diario-card" id="resumo-diario" style="display: none;">
+                <div><strong>Entradas do Dia:</strong> <span id="relatorio-entradas">R$ 0,00</span></div>
+                <div><strong>Saídas do Dia:</strong> <span id="relatorio-saidas">R$ 0,00</span></div>
+                <div><strong>Saldo do Dia:</strong> <span id="relatorio-saldo">R$ 0,00</span></div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th class="no-print">Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-corpo">
+                    <!-- Registros inseridos via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
